@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python,log," />
 
 
 
@@ -92,15 +92,17 @@
 
 
 
-<meta name="description" content="人生是首哲理诗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="飞鸟集">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路  为什么要在本地打印log打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：  将日志生产和日志收集分离开来。 在本地保留日志，更方便查看问题。 避免了直接往远端">
+<meta name="keywords" content="python,log">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python多进程本地打印log解决方案">
+<meta property="og:url" content="http://yoursite.com/2017/05/09/python-local-log/index.html">
 <meta property="og:site_name" content="飞鸟集">
-<meta property="og:description" content="人生是首哲理诗">
+<meta property="og:description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路  为什么要在本地打印log打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：  将日志生产和日志收集分离开来。 在本地保留日志，更方便查看问题。 避免了直接往远端">
+<meta property="og:updated_time" content="2017-05-08T23:40:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="飞鸟集">
-<meta name="twitter:description" content="人生是首哲理诗">
+<meta name="twitter:title" content="python多进程本地打印log解决方案">
+<meta name="twitter:description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路  为什么要在本地打印log打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：  将日志生产和日志收集分离开来。 在本地保留日志，更方便查看问题。 避免了直接往远端">
 
 
 
@@ -128,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/09/python-local-log/"/>
 
 
 
 
 
-  <title>飞鸟集</title>
+  <title>python多进程本地打印log解决方案 | 飞鸟集</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -159,9 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,9 +264,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -292,9 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/09/python-local-log/" itemprop="url">python多进程本地打印log解决方案</a></h1>
+          <h1 class="post-title" itemprop="name headline">python多进程本地打印log解决方案</h1>
         
 
         <div class="post-meta">
@@ -363,9 +361,7 @@
       
 
       
-        
-          
-            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>本文将从下面几个方面进行思考：</p>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>本文将从下面几个方面进行思考：</p>
 <ol>
 <li>为什么要在本地打印log</li>
 <li>多进程本地打印log存在的问题</li>
@@ -429,178 +425,95 @@
 <h3 id="后续的性能提升思路"><a href="#后续的性能提升思路" class="headerlink" title="后续的性能提升思路"></a>后续的性能提升思路</h3><p>写日志的瓶颈就是在IO。可以借鉴和参考java的logback组件的原理和设置来进一步优化写日志的性能。</p>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>[1] <a href="https://github.com/benoitc/gunicorn/issues/1272" target="_blank" rel="external">How do gunicorn workers log correctly?</a><br>[2] <a href="https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes" target="_blank" rel="external">官方doc: Logging to a single file from multiple processes</a><br>[3] <a href="http://www.cnblogs.com/xybaby/p/6596431.html" target="_blank" rel="external">由一个简单需求到Linux环境下的syslog、unix domain socket</a><br>[4] <a href="http://lightthewoods.me/2013/11/18/Python%E5%A4%9A%E8%BF%9B%E7%A8%8Blog%E6%97%A5%E5%BF%97%E5%88%87%E5%88%86%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="external">Python多进程log日志切分错误的解决方案</a></p>
 
-          
-        
       
     </div>
 
     <div>
       
+        
+
+      
     </div>
 
     <div>
       
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/07/beginning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XP">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="飞鸟集">
-    </span>
-
-    
-      <header class="post-header">
-
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/07/beginning/" itemprop="url">新的开始</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-07T22:25:50+08:00">
-                2017-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="XP WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.png" alt="XP Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
+
+      
+    </div>
+
+    <div>
       
         
-          
-            <p>开始正式写博客了。</p>
-<p>既然写，就要写好。而且，要一直写下去。</p>
-<p>Good Luck，buddy！</p>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/log/" rel="tag"># log</a>
+          
+        </div>
       
 
       
+        
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/07/beginning/" rel="next" title="新的开始">
+                <i class="fa fa-chevron-left"></i> 新的开始
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -608,6 +521,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -627,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -717,6 +643,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要在本地打印log"><span class="nav-number">2.</span> <span class="nav-text">为什么要在本地打印log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程本地打印log存在的问题"><span class="nav-number">3.</span> <span class="nav-text">进程本地打印log存在的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">4.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案的性能对比"><span class="nav-number">5.</span> <span class="nav-text">解决方案的性能对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后续的性能提升思路"><span class="nav-number">6.</span> <span class="nav-text">后续的性能提升思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">7.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -830,6 +772,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
