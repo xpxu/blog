@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/09/python-local-log/index.html">
 <meta property="og:site_name" content="飞鸟集">
 <meta property="og:description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路  为什么要在本地打印log打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：  将日志生产和日志收集分离开来。 在本地保留日志，更方便查看问题。 避免了直接往远端">
-<meta property="og:updated_time" content="2017-05-08T23:40:54.000Z">
+<meta property="og:updated_time" content="2017-05-09T16:03:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python多进程本地打印log解决方案">
 <meta name="twitter:description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路  为什么要在本地打印log打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：  将日志生产和日志收集分离开来。 在本地保留日志，更方便查看问题。 避免了直接往远端">
@@ -278,7 +278,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/09/python-local-log/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XP">
+      <meta itemprop="name" content="许鹏">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -423,7 +423,8 @@
 <p>虽然这里发生异常的情况很小，但是一旦发生就会有死锁的现象。所以，这里使用try…finally来释放锁。如果去看logging模块的源码，它对线程级的加锁和放锁也是这样处理的。</p>
 <h3 id="解决方案的性能对比"><a href="#解决方案的性能对比" class="headerlink" title="解决方案的性能对比"></a>解决方案的性能对比</h3><p>笔者在本地机器上对两种方案进行了压测。在500个client并发的情况下，如果日志轮转非常频繁(每分钟轮转一次)，rsyslog的方案是优于MultiProcessTimedRotatingFileHandler的。但是如果日志轮转次数有限(比如每日凌晨轮转一次)，MultiProcessTimedRotatingFileHandler是优于rsyslog方案的。</p>
 <h3 id="后续的性能提升思路"><a href="#后续的性能提升思路" class="headerlink" title="后续的性能提升思路"></a>后续的性能提升思路</h3><p>写日志的瓶颈就是在IO。可以借鉴和参考java的logback组件的原理和设置来进一步优化写日志的性能。</p>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>[1] <a href="https://github.com/benoitc/gunicorn/issues/1272" target="_blank" rel="external">How do gunicorn workers log correctly?</a><br>[2] <a href="https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes" target="_blank" rel="external">官方doc: Logging to a single file from multiple processes</a><br>[3] <a href="http://www.cnblogs.com/xybaby/p/6596431.html" target="_blank" rel="external">由一个简单需求到Linux环境下的syslog、unix domain socket</a><br>[4] <a href="http://lightthewoods.me/2013/11/18/Python%E5%A4%9A%E8%BF%9B%E7%A8%8Blog%E6%97%A5%E5%BF%97%E5%88%87%E5%88%86%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="external">Python多进程log日志切分错误的解决方案</a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>[1] <a href="https://github.com/benoitc/gunicorn/issues/1272" target="_blank" rel="external">How do gunicorn workers log correctly?</a><br>[2] <a href="https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes" target="_blank" rel="external">官方doc: Logging to a single file from multiple processes</a><br>[3] <a href="http://www.cnblogs.com/xybaby/p/6596431.html" target="_blank" rel="external">由一个简单需求到Linux环境下的syslog、unix domain socket</a><br>[4] <a href="http://lightthewoods.me/2013/11/18/Python%E5%A4%9A%E8%BF%9B%E7%A8%8Blog%E6%97%A5%E5%BF%97%E5%88%87%E5%88%86%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="external">Python多进程log日志切分错误的解决方案</a><br>    本文作者: XP<br>    版权声明: 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 CN 许可协议。转载请注明出处！</p>
+<p>本文永久链接：<a href="http://yoursite.com/2017/05/09/python-local-log/">http://yoursite.com/2017/05/09/python-local-log/</a></p>
 
       
     </div>
@@ -446,13 +447,13 @@
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="XP WeChat Pay"/>
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="许鹏 WeChat Pay"/>
           <p>微信打赏</p>
         </div>
       
       
         <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/images/alipay-reward-image.png" alt="XP Alipay"/>
+          <img id="alipay_qr" src="/images/alipay-reward-image.png" alt="许鹏 Alipay"/>
           <p>支付宝打赏</p>
         </div>
       
@@ -558,8 +559,8 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
-               alt="XP" />
-          <p class="site-author-name" itemprop="name">XP</p>
+               alt="许鹏" />
+          <p class="site-author-name" itemprop="name">许鹏</p>
            
               <p class="site-description motion-element" itemprop="description">人生是首哲理诗</p>
           
@@ -680,7 +681,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XP</span>
+  <span class="author" itemprop="copyrightHolder">许鹏</span>
 </div>
 
 
