@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路  为什么要在本地打印log打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：  将日志生产和日志收集分离开来。 在本地保留日志，更方便查看问题。 避免了直接往远端">
+<meta name="description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路">
 <meta name="keywords" content="python,log">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python多进程本地打印log解决方案">
 <meta property="og:url" content="http://yoursite.com/2017/05/09/python-local-log/index.html">
 <meta property="og:site_name" content="飞鸟集">
-<meta property="og:description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路  为什么要在本地打印log打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：  将日志生产和日志收集分离开来。 在本地保留日志，更方便查看问题。 避免了直接往远端">
-<meta property="og:updated_time" content="2017-05-09T16:03:52.000Z">
+<meta property="og:description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路">
+<meta property="og:updated_time" content="2017-05-10T00:15:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python多进程本地打印log解决方案">
-<meta name="twitter:description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路  为什么要在本地打印log打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：  将日志生产和日志收集分离开来。 在本地保留日志，更方便查看问题。 避免了直接往远端">
+<meta name="twitter:description" content="概述本文将从下面几个方面进行思考：  为什么要在本地打印log 多进程本地打印log存在的问题 解决方案 解决方案的性能对比 后续的性能提升思路">
 
 
 
@@ -369,6 +369,7 @@
 <li>解决方案的性能对比</li>
 <li>后续的性能提升思路</li>
 </ol>
+<a id="more"></a>
 <h3 id="为什么要在本地打印log"><a href="#为什么要在本地打印log" class="headerlink" title="为什么要在本地打印log"></a>为什么要在本地打印log</h3><p>打印log是后端服务的一个基本功能。而且，我们往往会把log打印到本地，然后再通过日志收集服务，将本地log文件收集起来。这样做的好处有三点：</p>
 <ol>
 <li>将日志生产和日志收集分离开来。</li>
